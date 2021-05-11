@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       eyeColour: "green"
     ),
     Character(
-        name: "Harry Potter",
+        name: "Manolo doido",
         image: "http://hp-api.herokuapp.com/images/harry.jpg",
         house: "Gryffindor",
         actor: "Daniel Radcliffe",

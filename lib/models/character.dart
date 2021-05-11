@@ -8,14 +8,16 @@ class Character {
   bool hogwartsStudent;
   String actor;
   String image;
+  int liked;
 
   Character({
-    @required this.actor,
-    @required this.hogwartsStudent,
-    @required this.house,
-    @required this.dateOfBirth,
-    @required this.eyeColour,
-    @required this.name,
-    @required this.image
+    this.actor,
+    this.hogwartsStudent,
+    this.house,
+    this.dateOfBirth,
+    this.eyeColour,
+    this.name,
+    this.image,
+    this.liked
   });
 }

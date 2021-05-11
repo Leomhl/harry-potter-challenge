@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harry_potter_challenge/components/liked.dart';
+import 'package:harry_potter_challenge/database/character_dao.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -13,7 +14,19 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
-  bool _favorite = false;
+  int _favorite = 0;
+  final CharacterDao _dao = CharacterDao();
+
+  @override
+  void initState() {
+    super.initState();
+    _dao.find(widget.character.name)
+    .then((character) {
+      setState(() {
+        _favorite = character[0].liked;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -68,10 +80,15 @@ class _CharacterScreenState extends State<CharacterScreen> {
                         Expanded(
                           child: Align(
                             child: Liked(
-                              isSelected: _favorite,
-                              onPressed: (){
+                              isSelected: _favorite == 0 ? false: true,
+                              onPressed: () async {
+                                _dao.save(Character(
+                                  name: widget.character.name,
+                                  liked: _favorite == 0 ? 1 : 0
+                                ));
+
                                 setState((){
-                                  _favorite = !_favorite;
+                                  _favorite = _favorite == 0 ? 1 : 0;
                                 });
                               }
                             ),
@@ -170,4 +187,11 @@ class _CharacterScreenState extends State<CharacterScreen> {
       ),
     );
   }
+
+
+
+  // isLiked() async {
+  //   var items = await _dao.find(widget.character.name);
+  //   print(items);
+  // }
 }
