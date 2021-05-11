@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Character {
   String name;
   String house;
@@ -10,14 +8,18 @@ class Character {
   String image;
   int liked;
 
-  Character({
-    this.actor,
-    this.hogwartsStudent,
-    this.house,
-    this.dateOfBirth,
-    this.eyeColour,
-    this.name,
-    this.image,
-    this.liked
-  });
+  Character(
+      {this.actor,
+      this.hogwartsStudent,
+      this.house,
+      this.dateOfBirth,
+      this.eyeColour,
+      this.name,
+      this.image,
+      this.liked});
+
+  @override
+  String toString() {
+    return 'Characters {name: $name ,hogwartsStudent: $hogwartsStudent ,contact: $house ,dateOfBirth: $dateOfBirth ,eyeColour $eyeColour ,actor: $actor ,image: $image }';
+  }
 }
