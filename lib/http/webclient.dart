@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:harry_potter_challenge/models/character.dart';
 import 'package:http/http.dart';
 

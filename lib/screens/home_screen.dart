@@ -80,7 +80,17 @@ class HomeScreen extends StatelessWidget {
                                 shadowColor: houseColors(),
                                 elevation: 5,
                                 child: ListTile(
-                                  leading: Image.network(items[index].image),
+                                  leading: Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit:  BoxFit.fill,
+                                        image: NetworkImage(items[index].image),
+                                      ),
+                                    ),
+                                  ),
                                   title: Text(
                                     items[index].name,
                                     style: TextStyle(fontSize: 20),
