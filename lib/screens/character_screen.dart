@@ -30,10 +30,12 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Color houseColor = houseColors();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.brown,
+        backgroundColor: houseColor,
         title: Text(
           widget.character.name,
           style: TextStyle(
@@ -172,9 +174,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
                           color: Colors.black,
                           fontSize: 22
                       ),
-                      children: <TextSpan>[
+                      children: [
                         TextSpan(text: 'Cor dos olhos: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: widget.character.eyeColour),
+                        WidgetSpan(child: Icon(Icons.remove_red_eye, color: eyeColors(),))
                       ],
                     ),
                   ),
@@ -186,6 +188,42 @@ class _CharacterScreenState extends State<CharacterScreen> {
         ),
       ),
     );
+  }
+
+  Color houseColors() {
+    Color houseColor = Colors.brown;
+    if(widget.character.house == 'Gryffindor'){
+      houseColor = Color.fromRGBO(174, 0, 1, 1);
+    }
+    if(widget.character.house == 'Slytherin'){
+      houseColor = Color.fromRGBO(26, 71, 42, 1);
+    }
+    if(widget.character.house == 'Hufflepuff'){
+      houseColor = Color.fromRGBO(236, 185, 57, 1);
+    }
+    if(widget.character.house == 'Ravenclaw'){
+      houseColor = Color.fromRGBO(34, 47, 91, 1);
+    }
+    return houseColor;
+  }
+  Color eyeColors() {
+    Color eyeColor = Colors.brown;
+    if(widget.character.eyeColour == 'green'){
+      eyeColor = Colors.green;
+    }
+    if(widget.character.eyeColour == 'blue'){
+      eyeColor = Colors.blue;
+    }
+    if(widget.character.eyeColour == 'grey'){
+      eyeColor = Colors.grey;
+    }
+    if(widget.character.eyeColour == 'black'){
+      eyeColor = Colors.black;
+    }
+    if(widget.character.eyeColour == 'red'){
+      eyeColor = Colors.red;
+    }
+    return eyeColor;
   }
 
 

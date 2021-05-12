@@ -4,46 +4,6 @@ import 'package:harry_potter_challenge/models/character.dart';
 import 'package:harry_potter_challenge/screens/character_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  // TODO: Trazer estes dados da api
-//  List<Character> items = [
-//    Character(
-//      name: "Harry Potter",
-//      image: "http://hp-api.herokuapp.com/images/harry.jpg",
-//      house: "Gryffindor",
-//      actor: "Daniel Radcliffe",
-//      hogwartsStudent: true,
-//      dateOfBirth: "31-07-1980",
-//      eyeColour: "green"
-//    ),
-//    Character(
-//        name: "Manolo doido",
-//        image: "http://hp-api.herokuapp.com/images/harry.jpg",
-//        house: "Gryffindor",
-//        actor: "Daniel Radcliffe",
-//        hogwartsStudent: true,
-//        dateOfBirth: "31-07-1980",
-//        eyeColour: "green"
-//    ),
-//    Character(
-//        name: "Harry Potter",
-//        image: "http://hp-api.herokuapp.com/images/harry.jpg",
-//        house: "Gryffindor",
-//        actor: "Daniel Radcliffe",
-//        hogwartsStudent: true,
-//        dateOfBirth: "31-07-1980",
-//        eyeColour: "green"
-//    ),
-//    Character(
-//        name: "Harry Potter",
-//        image: "http://hp-api.herokuapp.com/images/harry.jpg",
-//        house: "Gryffindor",
-//        actor: "Daniel Radcliffe",
-//        hogwartsStudent: true,
-//        dateOfBirth: "31-07-1980",
-//        eyeColour: "green"
-//    ),
-//  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +29,6 @@ class HomeScreen extends StatelessWidget {
               future: findAll(),
               builder: (context, snapshot) {
                 final List<Character> items = snapshot.data;
-
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                     break;
@@ -93,20 +52,41 @@ class HomeScreen extends StatelessWidget {
                         return ListView.builder(
                             itemCount: items.length,
                             itemBuilder: (BuildContext context, int index) {
+                              Color houseColors() {
+                                Color houseColor = Colors.black;
+                                if(items[index].house == 'Gryffindor'){
+                                  houseColor = Color.fromRGBO(174, 0, 1, 1);
+                                }
+                                if(items[index].house == 'Slytherin'){
+                                  houseColor = Color.fromRGBO(26, 71, 42, 1);;
+                                }
+                                if(items[index].house == 'Hufflepuff'){
+                                  houseColor = Color.fromRGBO(236, 185, 57, 1);;
+                                }
+                                if(items[index].house == 'Ravenclaw'){
+                                  houseColor = Color.fromRGBO(34, 47, 91, 1);;
+                                }
+                                return houseColor;
+                              }
                               return Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: ListTile(
-                                  title: Text(items[index].name),
-                                  subtitle: Text(items[index].house),
-                                  onTap: () {
-                                    print("Apertou no ${items[index].name}");
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CharacterScreen(character: items[index])),
-                                    );
-                                  },
+                                child: Card(
+                                  shadowColor: houseColors(),
+                                  elevation: 5,
+                                  child: ListTile(
+                                    leading: Image.network(items[index].image),
+                                    title: Text(items[index].name, style: TextStyle(fontSize: 20),),
+                                    subtitle: Text(items[index].house, style: TextStyle(fontSize: 16)),
+                                    onTap: () {
+                                      print("Apertou no ${items[index].name}");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CharacterScreen(character: items[index])),
+                                      );
+                                    },
+                                  ),
                                 ),
                               );
                             });
@@ -118,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                 return Text('Erro');
               },
             ),
-          )
+          ),
         ]));
   }
 }

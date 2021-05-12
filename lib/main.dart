@@ -4,7 +4,6 @@ import 'package:harry_potter_challenge/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
-  findAll().then((characters) => print('new characters: $characters'));
 }
 
 class MyApp extends StatelessWidget {
