@@ -23,7 +23,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
     _dao.find(widget.character.name)
     .then((character) {
       setState(() {
-        _favorite = character[0].liked;
+        if(character.length > 0)
+          _favorite = character[0].liked;
+        else
+          _favorite = 0;
       });
     });
   }
@@ -87,9 +90,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                                 _dao.save(Character(
                                   name: widget.character.name,
                                   liked: _favorite == 0 ? 1 : 0
-                                )).then((id){
-                                  _dao.findAll().then((characters) => debugPrint(characters.toString()));
-                                });
+                                ));
 
                                 setState((){
                                   _favorite = _favorite == 0 ? 1 : 0;
