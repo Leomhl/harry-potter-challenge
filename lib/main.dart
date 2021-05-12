@@ -4,6 +4,7 @@ import 'package:harry_potter_challenge/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

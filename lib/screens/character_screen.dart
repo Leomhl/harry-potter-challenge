@@ -87,7 +87,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
                                 _dao.save(Character(
                                   name: widget.character.name,
                                   liked: _favorite == 0 ? 1 : 0
-                                ));
+                                )).then((id){
+                                  _dao.findAll().then((characters) => debugPrint(characters.toString()));
+                                });
 
                                 setState((){
                                   _favorite = _favorite == 0 ? 1 : 0;
