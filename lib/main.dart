@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harry_potter_challenge/http/featureclient.dart';
 import 'package:harry_potter_challenge/screens/home_screen.dart';
 
 void main() {

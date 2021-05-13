@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:harry_potter_challenge/http/featureclient.dart';
 import 'package:harry_potter_challenge/http/webclient.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 import 'package:harry_potter_challenge/screens/character_screen.dart';
 
+import 'favorite_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
@@ -74,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                                   shadowColor: houseColors(),
                                   elevation: 5,
                                   child: ListTile(
-                                    leading: Image.network(items[index].image),
+                                    leading: _avatar(items[index].image),
                                     title: Text(items[index].name, style: TextStyle(fontSize: 20),),
                                     subtitle: Text(items[index].house, style: TextStyle(fontSize: 16)),
                                     onTap: () {
@@ -98,6 +102,30 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
-        ]));
+        ]),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: Icon(Icons.favorite,),
+        onPressed: () {
+          findAllFeatures();
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => FavoriteScreen()),
+          );
+        },
+      ),
+    );
+  }
+
+  _avatar(String image) {
+//    final bool active = findAllFeatures(); // Não consegui passar do Future<bool> para bool
+    if (true) {
+      return CircleAvatar(
+        backgroundImage: NetworkImage(image),
+        radius: 20,
+      );
+    }
+    else{
+      return Image.network(image);
+    }
   }
 }

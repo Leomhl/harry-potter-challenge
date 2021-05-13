@@ -229,10 +229,4 @@ class _CharacterScreenState extends State<CharacterScreen> {
     return eyeColor;
   }
 
-
-
-  // isLiked() async {
-  //   var items = await _dao.find(widget.character.name);
-  //   print(items);
-  // }
 }
