@@ -66,16 +66,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               case ConnectionState.none:
                                 break;
                               case ConnectionState.waiting:
-                                return  Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      CircularProgressIndicator(),
-                                      Text('Carregando')
-                                    ],
-                                  ),
-                                );
+                               return Image.network(widget.character.image);
                                 break;
                               case ConnectionState.active:
                                 break;
