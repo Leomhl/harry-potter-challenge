@@ -78,7 +78,10 @@ class HomeScreen extends StatelessWidget {
                                   shadowColor: houseColors(),
                                   elevation: 5,
                                   child: ListTile(
-                                    leading: _avatar(items[index].image),
+                                    leading: CircleAvatar(
+                                      backgroundImage: NetworkImage(items[index].image),
+                                      radius: 20,
+                                    ),
                                     title: Text(items[index].name, style: TextStyle(fontSize: 20),),
                                     subtitle: Text(items[index].house, style: TextStyle(fontSize: 16)),
                                     onTap: () {
@@ -114,18 +117,5 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  _avatar(String image) {
-//    final bool active = findAllFeatures(); // Não consegui passar do Future<bool> para bool
-    if (true) {
-      return CircleAvatar(
-        backgroundImage: NetworkImage(image),
-        radius: 20,
-      );
-    }
-    else{
-      return Image.network(image);
-    }
   }
 }

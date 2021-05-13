@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harry_potter_challenge/components/liked.dart';
 import 'package:harry_potter_challenge/database/character_dao.dart';
+import 'package:harry_potter_challenge/http/featureclient.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -57,9 +58,44 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 children: [
                   Row(
                       children: [
-                        Image.network(
-                          widget.character.image,
-                          width: 100,
+                        FutureBuilder<bool>(
+                          future: findAllFeatures(),
+                          builder:(context,snapshot){
+                            final bool active = snapshot.data;
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.none:
+                                break;
+                              case ConnectionState.waiting:
+                                return  Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      CircularProgressIndicator(),
+                                      Text('Carregando')
+                                    ],
+                                  ),
+                                );
+                                break;
+                              case ConnectionState.active:
+                                break;
+                              case ConnectionState.done:
+                                if (snapshot.hasData) {
+                                  if (active) {
+                                    return CircleAvatar(
+                                      backgroundImage: NetworkImage(widget.character.image),
+                                      radius: 80,
+                                    );
+                                  }
+                                  else{
+                                    return Image.network(widget.character.image);
+                                  }
+                                }
+                                return Text('Erro ao carregar personagens');
+                            }
+
+                            return Text('Erro');
+                          }
                         ),
                         SizedBox(width: 10),
                         Column(
