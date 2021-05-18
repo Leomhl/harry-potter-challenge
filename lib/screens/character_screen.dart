@@ -43,7 +43,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
         title: Text(
           widget.character.name,
           style: TextStyle(
-              fontWeight: FontWeight.w700
+              fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -66,7 +66,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
                               case ConnectionState.none:
                                 break;
                               case ConnectionState.waiting:
-                               return Image.network(widget.character.image);
+                               return Image.network(
+                                 widget.character.image,
+                                 width: 100,
+                               );
                                 break;
                               case ConnectionState.active:
                                 break;
@@ -95,7 +98,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             Text(
                               widget.character.name,
                               style: TextStyle(
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
