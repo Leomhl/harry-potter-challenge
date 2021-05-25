@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:harry_potter_challenge/components/app_dependencies.dart';
 import 'package:harry_potter_challenge/components/liked.dart';
 import 'package:harry_potter_challenge/database/character_dao.dart';
-import 'package:harry_potter_challenge/http/featureclient.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -20,6 +20,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   @override
   void initState() {
+
     super.initState();
     _dao.find(widget.character.name)
     .then((character) {
@@ -34,6 +35,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
     Color houseColor = houseColors();
 
     return Scaffold(
@@ -58,39 +60,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 children: [
                   Row(
                       children: [
-                        FutureBuilder<bool>(
-                          future: findAllFeatures(),
-                          builder:(context,snapshot){
-                            final bool active = snapshot.data;
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.none:
-                                break;
-                              case ConnectionState.waiting:
-                               return Image.network(
-                                 widget.character.image,
-                                 width: 100,
-                               );
-                                break;
-                              case ConnectionState.active:
-                                break;
-                              case ConnectionState.done:
-                                if (snapshot.hasData) {
-                                  if (active) {
-                                    return CircleAvatar(
-                                      backgroundImage: NetworkImage(widget.character.image),
-                                      radius: 80,
-                                    );
-                                  }
-                                  else{
-                                    return Image.network(widget.character.image);
-                                  }
-                                }
-                                return Text('Erro ao carregar personagens');
-                            }
-
-                            return Text('Erro');
-                          }
-                        ),
+                       Image.network(
+                        widget.character.image,
+                        width: 100,
+                      ),
                         SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +90,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             child: Liked(
                               isSelected: _favorite == 0 ? false: true,
                               onPressed: () async {
-                                _dao.save(Character(
+                                dependencies.characterDao.save(Character(
                                   name: widget.character.name,
                                   liked: _favorite == 0 ? 1 : 0
                                 ));

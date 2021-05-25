@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:harry_potter_challenge/database/character_dao.dart';
-import 'package:harry_potter_challenge/http/webclient.dart';
+import 'package:harry_potter_challenge/components/app_dependencies.dart';
 import 'package:harry_potter_challenge/models/character.dart';
-import 'package:harry_potter_challenge/screens/character_screen.dart';
+
+
 
 class FavoriteScreen extends StatelessWidget {
-  final CharacterDao _dao = CharacterDao();
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -28,7 +28,7 @@ class FavoriteScreen extends StatelessWidget {
         ),
         Expanded(
           child: FutureBuilder<List<Character>>(
-            future: _dao.findAll(),
+            future: dependencies.characterDao.findAll(),
             builder: (context, snapshot) {
               final List<Character> items = snapshot.data;
               switch (snapshot.connectionState) {
@@ -54,14 +54,8 @@ class FavoriteScreen extends StatelessWidget {
                       return ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                              child: Card(
-                                child: ListTile(
-                                  title: Text(items[index].name, style: TextStyle(fontSize: 20),),
-                                ),
-                              ),
-                            );
+                            final Character character = items[index];
+                            return CharacterItem(character);
                           });
                     }
                   }
@@ -73,6 +67,23 @@ class FavoriteScreen extends StatelessWidget {
           ),
         ),
       ]),
+    );
+  }
+}
+class CharacterItem extends StatelessWidget {
+  final Character character;
+
+  CharacterItem(this.character);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Card(
+        child: ListTile(
+          title: Text(character.name, style: TextStyle(fontSize: 20),),
+        ),
+      ),
     );
   }
 }

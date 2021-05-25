@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:harry_potter_challenge/http/featureclient.dart';
-import 'package:harry_potter_challenge/http/webclient.dart';
+import 'package:harry_potter_challenge/components/app_dependencies.dart';
+
 import 'package:harry_potter_challenge/models/character.dart';
 import 'package:harry_potter_challenge/screens/character_screen.dart';
-
+import '../http/webclient.dart';
 import 'favorite_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  final CharacterWebClient webClient = CharacterWebClient();
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -30,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Expanded(
             child: FutureBuilder<List<Character>>(
-              future: findAll(),
+              future: dependencies.characterWebClient.findAll(),
               builder: (context, snapshot) {
                 final List<Character> items = snapshot.data;
                 switch (snapshot.connectionState) {
@@ -110,7 +112,6 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.black,
         child: Icon(Icons.favorite,),
         onPressed: () {
-          findAllFeatures();
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => FavoriteScreen()),
           );
