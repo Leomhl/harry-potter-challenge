@@ -35,7 +35,6 @@ class HomeScreen extends StatelessWidget {
           child: FutureBuilder<List<Character>>(
             future: dependencies.characterWebClient.findAll(),
             builder: (context, snapshot) {
-              final List<Character> items = snapshot.data!;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                   break;
@@ -54,6 +53,7 @@ class HomeScreen extends StatelessWidget {
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasData) {
+                    final List<Character> items = snapshot.data!;
                     if (items.isNotEmpty) {
                       return ListView.builder(
                           itemCount: items.length,
