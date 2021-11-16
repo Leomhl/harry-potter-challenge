@@ -1,8 +1,9 @@
 import 'dart:convert';
+
 import 'package:harry_potter_challenge/models/character.dart';
 import 'package:http/http.dart';
 
-class CharacterWebClient{
+class CharacterWebClient {
   Future<List<Character>> findAll() async {
     var url = Uri.parse('https://hp-api.herokuapp.com/api/characters');
     final Response response = await get(url);

@@ -9,17 +9,18 @@ class AppDependencies extends InheritedWidget {
   final Widget child;
 
   AppDependencies(
-      {@required this.characterDao,
-      @required this.characterWebClient,
-      @required this.child})
+      {required this.characterDao,
+      required this.characterWebClient,
+      required this.child})
       : super(child: child);
 
-  static AppDependencies of(BuildContext context){
-    return context.dependOnInheritedWidgetOfExactType<AppDependencies>();
+  static AppDependencies of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<AppDependencies>()!;
   }
 
   @override
   bool updateShouldNotify(AppDependencies oldWidget) {
-    return characterDao != oldWidget.characterDao || characterWebClient != characterWebClient;
+    return characterDao != oldWidget.characterDao ||
+        characterWebClient != characterWebClient;
   }
 }
