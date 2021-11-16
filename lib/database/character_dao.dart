@@ -7,7 +7,6 @@ class CharacterDao {
       '$_name TEXT UNIQUE, '
       '$_liked INTEGER)';
   static const String _tableName = 'characters';
-  static const String _id = 'id';
   static const String _name = 'name';
   static const String _liked = 'liked';
 

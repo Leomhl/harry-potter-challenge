@@ -5,7 +5,7 @@ import 'package:harry_potter_challenge/database/character_dao.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
-  Character character;
+  final Character character;
 
   CharacterScreen({required this.character});
 
