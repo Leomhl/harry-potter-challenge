@@ -5,7 +5,6 @@ import 'package:harry_potter_challenge/database/character_dao.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
 class CharacterScreen extends StatefulWidget {
-
   Character character;
 
   CharacterScreen({required this.character});
@@ -21,10 +20,9 @@ class _CharacterScreenState extends State<CharacterScreen> {
   @override
   void initState() {
     super.initState();
-    _dao.find(widget.character.name)
-    .then((character) {
+    _dao.find(widget.character.name).then((character) {
       setState(() {
-        if(character.length > 0)
+        if (character.length > 0)
           _favorite = character[0].liked;
         else
           _favorite = 0;
@@ -44,7 +42,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
         title: Text(
           widget.character.name,
           style: TextStyle(
-              fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -57,65 +55,58 @@ class _CharacterScreenState extends State<CharacterScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Row(children: [
+                    Image.network(
+                      widget.character.image!,
+                      width: 100,
+                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Image.network(
-                        widget.character.image!,
-                        width: 100,
-                      ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.character.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-
-                            Text(
-                              widget.character.house!,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: Align(
-                            child: Liked(
-                              isSelected: _favorite == 0 ? false: true,
-                              onPressed: () async {
-                                dependencies.characterDao.save(Character(
-                                  name: widget.character.name,
-                                  liked: _favorite == 0 ? 1 : 0
-                                ));
-
-                                setState((){
-                                  _favorite = _favorite == 0 ? 1 : 0;
-                                });
-                              }
-                            ),
-                            alignment: Alignment.centerRight,
+                        Text(
+                          widget.character.name,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                           ),
-                        )
+                        ),
+                        Text(
+                          widget.character.house!,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Align(
+                        child: Liked(
+                            isSelected: _favorite == 0 ? false : true,
+                            onPressed: () async {
+                              dependencies.characterDao.save(Character(
+                                  name: widget.character.name,
+                                  liked: _favorite == 0 ? 1 : 0));
 
-                      ]
-                  ),
+                              setState(() {
+                                _favorite = _favorite == 0 ? 1 : 0;
+                              });
+                            }),
+                        alignment: Alignment.centerRight,
+                      ),
+                    )
+                  ]),
                   SizedBox(height: 15),
                   Divider(),
                   SizedBox(height: 15),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: <TextSpan>[
-                        TextSpan(text: 'Nome: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: 'Nome: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: widget.character.name),
                       ],
                     ),
@@ -123,12 +114,11 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: <TextSpan>[
-                        TextSpan(text: 'Casa: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: 'Casa: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: widget.character.house),
                       ],
                     ),
@@ -136,12 +126,11 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: <TextSpan>[
-                        TextSpan(text: 'Ator(a): ', style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: 'Ator(a): ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: widget.character.actor),
                       ],
                     ),
@@ -149,25 +138,26 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: <TextSpan>[
-                        TextSpan(text: 'Aluno(a): ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: widget.character.hogwartsStudent! ? "Sim": "Não"),
+                        TextSpan(
+                            text: 'Aluno(a): ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: widget.character.hogwartsStudent!
+                                ? "Sim"
+                                : "Não"),
                       ],
                     ),
                   ),
                   SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: <TextSpan>[
-                        TextSpan(text: 'Aniversário: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: 'Aniversário: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: widget.character.dateOfBirth),
                       ],
                     ),
@@ -175,19 +165,24 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   SizedBox(height: 10),
                   RichText(
                     text: TextSpan(
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22
-                      ),
+                      style: TextStyle(color: Colors.black, fontSize: 22),
                       children: [
-                        TextSpan(text: 'Cor dos olhos: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        WidgetSpan(child: Icon(Icons.remove_red_eye, color: eyeColors(),))
+                        TextSpan(
+                            text: 'Cor dos olhos: ',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        WidgetSpan(
+                            child: Icon(
+                          Icons.remove_red_eye,
+                          color: eyeColors(),
+                        ))
                       ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),
@@ -197,38 +192,38 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   Color houseColors() {
     Color houseColor = Colors.brown;
-    if(widget.character.house == 'Gryffindor'){
+    if (widget.character.house == 'Gryffindor') {
       houseColor = Color.fromRGBO(174, 0, 1, 1);
     }
-    if(widget.character.house == 'Slytherin'){
+    if (widget.character.house == 'Slytherin') {
       houseColor = Color.fromRGBO(26, 71, 42, 1);
     }
-    if(widget.character.house == 'Hufflepuff'){
+    if (widget.character.house == 'Hufflepuff') {
       houseColor = Color.fromRGBO(236, 185, 57, 1);
     }
-    if(widget.character.house == 'Ravenclaw'){
+    if (widget.character.house == 'Ravenclaw') {
       houseColor = Color.fromRGBO(34, 47, 91, 1);
     }
     return houseColor;
   }
+
   Color eyeColors() {
     Color eyeColor = Colors.brown;
-    if(widget.character.eyeColour == 'green'){
+    if (widget.character.eyeColour == 'green') {
       eyeColor = Colors.green;
     }
-    if(widget.character.eyeColour == 'blue'){
+    if (widget.character.eyeColour == 'blue') {
       eyeColor = Colors.blue;
     }
-    if(widget.character.eyeColour == 'grey'){
+    if (widget.character.eyeColour == 'grey') {
       eyeColor = Colors.grey;
     }
-    if(widget.character.eyeColour == 'black'){
+    if (widget.character.eyeColour == 'black') {
       eyeColor = Colors.black;
     }
-    if(widget.character.eyeColour == 'red'){
+    if (widget.character.eyeColour == 'red') {
       eyeColor = Colors.red;
     }
     return eyeColor;
   }
-
 }

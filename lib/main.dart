@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:harry_potter_challenge/components/app_dependencies.dart';
-import 'package:harry_potter_challenge/screens/home_screen.dart';
 import 'package:harry_potter_challenge/database/character_dao.dart';
 import 'package:harry_potter_challenge/http/webclient.dart';
+import 'package:harry_potter_challenge/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp(

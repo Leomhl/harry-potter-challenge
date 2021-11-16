@@ -8,11 +8,8 @@ import 'package:harry_potter_challenge/screens/favorite_screen.dart';
 import '../mocks/MockCharacterDao.dart';
 import '../mocks/MockCharacterWebClient.dart';
 
-
-
 void main() {
   testWidgets('Navigation_Favorite', (tester) async {
-
     final mockCharacterDao = MockCharacterDao();
     final mockCharacterWebClient = MockCharacterWebClient();
     await tester.pumpWidget(MyApp(
@@ -25,7 +22,8 @@ void main() {
     final homeScreen = find.byType(HomeScreen);
     expect(homeScreen, findsOneWidget);
 
-    final fabFavorite = find.widgetWithIcon(FloatingActionButton, Icons.favorite);
+    final fabFavorite =
+        find.widgetWithIcon(FloatingActionButton, Icons.favorite);
     expect(fabFavorite, findsOneWidget);
 
     when(mockCharacterDao.findAll()).thenAnswer((realInvocation) async {
@@ -47,7 +45,5 @@ void main() {
       return false;
     });
     expect(characterItem, findsOneWidget);
-
-
   });
 }

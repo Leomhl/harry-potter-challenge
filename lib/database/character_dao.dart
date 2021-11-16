@@ -3,7 +3,6 @@ import 'package:harry_potter_challenge/models/character.dart';
 import 'package:harry_potter_challenge/database/app_database.dart';
 
 class CharacterDao {
-
   static const String tableSql = 'CREATE TABLE $_tableName('
       '$_name TEXT UNIQUE, '
       '$_liked INTEGER)';
@@ -17,15 +16,10 @@ class CharacterDao {
     var itemExists = await find(character.name);
     Map<String, dynamic> characterMap = _toMap(character);
 
-    if(itemExists.length == 0)
-      return db.insert(_tableName, characterMap);
+    if (itemExists.length == 0) return db.insert(_tableName, characterMap);
 
-    return await db.update(
-      _tableName,
-      characterMap,
-      where: '$_name = ?',
-      whereArgs: [character.name]
-    );
+    return await db.update(_tableName, characterMap,
+        where: '$_name = ?', whereArgs: [character.name]);
   }
 
   Future<List<Character>> findAll() async {
@@ -37,11 +31,8 @@ class CharacterDao {
 
   Future<List<Character>> find(String name) async {
     final Database db = await getDatabase();
-    final List<Map<String, dynamic>> result = await db.query(
-      _tableName,
-      where: '$_name = ?',
-      whereArgs: [name]
-    );
+    final List<Map<String, dynamic>> result =
+        await db.query(_tableName, where: '$_name = ?', whereArgs: [name]);
 
     return _toList(result);
   }

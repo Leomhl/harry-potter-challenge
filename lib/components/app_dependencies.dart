@@ -14,12 +14,13 @@ class AppDependencies extends InheritedWidget {
       required this.child})
       : super(child: child);
 
-  static AppDependencies of(BuildContext context){
+  static AppDependencies of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<AppDependencies>()!;
   }
 
   @override
   bool updateShouldNotify(AppDependencies oldWidget) {
-    return characterDao != oldWidget.characterDao || characterWebClient != characterWebClient;
+    return characterDao != oldWidget.characterDao ||
+        characterWebClient != characterWebClient;
   }
 }

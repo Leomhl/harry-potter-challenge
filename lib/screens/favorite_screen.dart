@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:harry_potter_challenge/components/app_dependencies.dart';
 import 'package:harry_potter_challenge/models/character.dart';
 
-
-
 class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class FavoriteScreen extends StatelessWidget {
                 case ConnectionState.none:
                   break;
                 case ConnectionState.waiting:
-                  return  Center(
+                  return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,7 +48,8 @@ class FavoriteScreen extends StatelessWidget {
                 case ConnectionState.done:
                   if (snapshot.hasData) {
                     if (items!.isNotEmpty) {
-                      final likedCharacters = items.where((c) => c.liked == 1).toList();
+                      final likedCharacters =
+                          items.where((c) => c.liked == 1).toList();
                       return ListView.builder(
                           itemCount: likedCharacters.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -70,6 +69,7 @@ class FavoriteScreen extends StatelessWidget {
     );
   }
 }
+
 class CharacterItem extends StatelessWidget {
   final Character character;
 
@@ -81,7 +81,10 @@ class CharacterItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
         child: ListTile(
-          title: Text(character.name, style: TextStyle(fontSize: 20),),
+          title: Text(
+            character.name,
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );
