@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             child: FutureBuilder<List<Character>>(
               future: dependencies.characterWebClient.findAll(),
               builder: (context, snapshot) {
-                final List<Character> items = snapshot.data;
+                final List<Character> items = snapshot.data!;
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                     break;
@@ -49,7 +49,6 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     );
-                    break;
                   case ConnectionState.active:
                     break;
                   case ConnectionState.done:
@@ -64,13 +63,13 @@ class HomeScreen extends StatelessWidget {
                                   houseColor = Color.fromRGBO(174, 0, 1, 1);
                                 }
                                 if(items[index].house == 'Slytherin'){
-                                  houseColor = Color.fromRGBO(26, 71, 42, 1);;
+                                  houseColor = Color.fromRGBO(26, 71, 42, 1);
                                 }
                                 if(items[index].house == 'Hufflepuff'){
-                                  houseColor = Color.fromRGBO(236, 185, 57, 1);;
+                                  houseColor = Color.fromRGBO(236, 185, 57, 1);
                                 }
                                 if(items[index].house == 'Ravenclaw'){
-                                  houseColor = Color.fromRGBO(34, 47, 91, 1);;
+                                  houseColor = Color.fromRGBO(34, 47, 91, 1);
                                 }
                                 return houseColor;
                               }
@@ -81,11 +80,11 @@ class HomeScreen extends StatelessWidget {
                                   elevation: 5,
                                   child: ListTile(
                                     leading: CircleAvatar(
-                                      backgroundImage: NetworkImage(items[index].image),
+                                      backgroundImage: NetworkImage(items[index].image!),
                                       radius: 20,
                                     ),
                                     title: Text(items[index].name, style: TextStyle(fontSize: 20),),
-                                    subtitle: Text(items[index].house, style: TextStyle(fontSize: 16)),
+                                    subtitle: Text(items[index].house!, style: TextStyle(fontSize: 16)),
                                     onTap: () {
                                       Navigator.push(
                                         context,

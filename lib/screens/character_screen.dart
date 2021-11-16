@@ -8,19 +8,18 @@ class CharacterScreen extends StatefulWidget {
 
   Character character;
 
-  CharacterScreen({this.character});
+  CharacterScreen({required this.character});
 
   @override
   _CharacterScreenState createState() => _CharacterScreenState();
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
-  int _favorite = 0;
+  int? _favorite = 0;
   final CharacterDao _dao = CharacterDao();
 
   @override
   void initState() {
-
     super.initState();
     _dao.find(widget.character.name)
     .then((character) {
@@ -61,7 +60,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   Row(
                       children: [
                        Image.network(
-                        widget.character.image,
+                        widget.character.image!,
                         width: 100,
                       ),
                         SizedBox(width: 10),
@@ -77,7 +76,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                             ),
 
                             Text(
-                              widget.character.house,
+                              widget.character.house!,
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
@@ -156,7 +155,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                       ),
                       children: <TextSpan>[
                         TextSpan(text: 'Aluno(a): ', style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: widget.character.hogwartsStudent ? "Sim": "Não"),
+                        TextSpan(text: widget.character.hogwartsStudent! ? "Sim": "Não"),
                       ],
                     ),
                   ),

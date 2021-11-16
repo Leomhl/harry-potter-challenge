@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Liked extends StatelessWidget {
   final bool isSelected;
   final Function onPressed;
-  Liked({this.isSelected, this.onPressed});
+  Liked({required this.isSelected, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

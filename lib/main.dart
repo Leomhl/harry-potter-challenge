@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   final CharacterDao characterDao;
   final CharacterWebClient characterWebClient;
 
-  MyApp({@required this.characterDao, @required this.characterWebClient});
+  MyApp({required this.characterDao, required this.characterWebClient});
 
   @override
   Widget build(BuildContext context) {

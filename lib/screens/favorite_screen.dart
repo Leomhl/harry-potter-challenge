@@ -30,7 +30,7 @@ class FavoriteScreen extends StatelessWidget {
           child: FutureBuilder<List<Character>>(
             future: dependencies.characterDao.findAll(),
             builder: (context, snapshot) {
-              final List<Character> items = snapshot.data;
+              final List<Character>? items = snapshot.data;
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                   break;
@@ -45,16 +45,16 @@ class FavoriteScreen extends StatelessWidget {
                       ],
                     ),
                   );
-                  break;
                 case ConnectionState.active:
                   break;
                 case ConnectionState.done:
                   if (snapshot.hasData) {
-                    if (items.isNotEmpty) {
+                    if (items!.isNotEmpty) {
+                      final likedCharacters = items.where((c) => c.liked == 1).toList();
                       return ListView.builder(
-                          itemCount: items.length,
+                          itemCount: likedCharacters.length,
                           itemBuilder: (BuildContext context, int index) {
-                            final Character character = items[index];
+                            final Character character = likedCharacters[index];
                             return CharacterItem(character);
                           });
                     }

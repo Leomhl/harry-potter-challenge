@@ -9,15 +9,15 @@ void main (){
     expect(charactertest.name, 'Harry');
   });
   test('Test_Character_Actor', (){
-    final charactertest = Character(actor: 'Daniel Radcliffe');
+    final charactertest = Character(name: 'Harry', actor: 'Daniel Radcliffe');
     expect(charactertest.actor, 'Daniel Radcliffe');
   });
   test('Test_Character_House', (){
-    final charactertest = Character(house: 'Gryffindor');
+    final charactertest = Character(name: 'Harry', house: 'Gryffindor');
     expect(charactertest.house, 'Gryffindor');
   });
   test('Test_Character_Liked', (){
-    final charactertest = Character(liked: 1);
+    final charactertest = Character(name: 'Harry', liked: 1);
     expect(charactertest.liked, 1);
   });
 }
